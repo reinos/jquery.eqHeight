@@ -1,0 +1,60 @@
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="eqHeight.js"></script>
+<script>
+    $(function(){
+        $('.row').eqHeight({
+        	columnSelector : '.column',
+        	accountForPadding : true
+        });
+    });
+</script>
+
+<style>
+    .column {
+        border:1px solid black;
+    }
+</style>
+
+<div class="row" style="display: block; clear: both;">
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+        <p>Line 4</p>
+    </div>
+    <div class="column" style="display: block; float: left; width: 200px; padding-bottom:20px;">
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+        <p>Line 4</p>
+        <p>Line 5</p>
+    </div>
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+    </div>
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+    </div>
+</div>
+<div class="row" style="display: block; clear: both;">
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+        <p>Line 4</p>
+    </div>
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+        <p>Line 2</p>
+        <p>Line 3</p>
+        <p>Line 4</p>
+        <p>Line 5</p>
+    </div>
+    <div class="column" style="display: block; float: left; width: 200px;">
+        <p>Line 1</p>
+    </div>
+   
+</div>  
+
