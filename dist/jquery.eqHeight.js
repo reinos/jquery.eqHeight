@@ -1,5 +1,5 @@
 /*
- * jquery.eqheight - v1.0.0
+ * jquery.eqheight - v1.1.0
  * Take the pain of eqHeight away
  * https://github.com/reinos/jquery.eqHeight
  *
