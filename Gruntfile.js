@@ -46,6 +46,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     
-    grunt.registerTask("travis", ["jshint", "concat", "uglify"]);
+    grunt.registerTask("travis", ["jshint"]);
     grunt.registerTask("default", ["jshint", "concat", "uglify"]);
 };
