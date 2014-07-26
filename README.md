@@ -1,4 +1,4 @@
-# jquery.eqHeight
+# jquery.eqHeight [![Build Status](https://api.travis-ci.org/reinos/jquery.eqHeight.png?branch=master)](https://api.travis-ci.org/reinos/jquery.eqHeight)
 
 **jquery.eqHeight** is a jQuery plugin that stretches fluid columns to equal height. It is originally designed to be used in responsive web design.
 
