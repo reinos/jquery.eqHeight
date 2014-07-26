@@ -10,7 +10,7 @@
     var pluginName = "eqHeight",
         defaults = {
             accountForPadding: false, // true , false
-            columnSelector: '',
+            columnSelector: "",
             onReady: function() {},
             onResize: function() {},
         };
@@ -62,7 +62,7 @@
         setTimeout(function() {
             obj.equalizer();
             // call the onReady function
-            if (typeof obj.options.onReady == "function") {
+            if (typeof obj.options.onReady === "function") {
                 obj.options.onReady();
             }
         }, 100);
@@ -71,15 +71,14 @@
         $(window).resize(function() {
             obj.equalizer();
             // call the onResize function
-            if (typeof obj.options.onResize == "function") {
+            if (typeof obj.options.onResize === "function") {
                 obj.options.onResize();
             }
         });
     };
 
     Plugin.prototype.equalizer = function() {
-        var $elem = $(this.element),
-            obj = this;
+        var obj = this;
 
         //set the height to auto
         obj.columns.height("auto");
@@ -129,17 +128,13 @@
 
     //eqHeight the marked columns
     Plugin.prototype.equalizeMarkedColumns = function() {
-        var $elem = $(this.element),
-            obj = this;
-
-        //set vars
-        var markedColumns, maxColHeight, paddingTop, paddingBottom;
+        var obj = this;
 
         //get the markerd element
         obj.markedColumns = $(".eqHeight_row");
 
         //default height
-        maxColHeight = 0;
+        var maxColHeight = 0;
 
         //loop over the marked columns
         obj.markedColumns.each(function() {
