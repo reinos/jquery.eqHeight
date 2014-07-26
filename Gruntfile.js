@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             plugin: {
-                src: ["src/jquery.eqHeight.js"],
+                src: ["dist/jquery.eqHeight.js"],
                 dest: "dist/jquery.eqHeight.js"
             },
             options: {
