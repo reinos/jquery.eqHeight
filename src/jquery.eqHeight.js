@@ -7,7 +7,7 @@
 
     // Create the defaults once
     // heights - http://www.texelate.co.uk/blog/jquery-whats-the-difference-between-height-innerheight-and-outerheight/
-    var pluginName = 'eqHeight',
+    var pluginName = "eqHeight",
         defaults = {
             accountForPadding: false, // true , false
             columnSelector: '',
@@ -20,7 +20,7 @@
         this.element = element;
 
         //if the options var is a string, just put this as the column_selector
-        if (typeof(options) === 'string') {
+        if (typeof(options) === "string") {
             var columnSelector = options;
             options = {};
             options.columnSelector = columnSelector;
@@ -62,7 +62,7 @@
         setTimeout(function() {
             obj.equalizer();
             // call the onReady function
-            if (typeof obj.options.onReady == 'function') {
+            if (typeof obj.options.onReady == "function") {
                 obj.options.onReady();
             }
         }, 100);
@@ -71,7 +71,7 @@
         $(window).resize(function() {
             obj.equalizer();
             // call the onResize function
-            if (typeof obj.options.onResize == 'function') {
+            if (typeof obj.options.onResize == "function") {
                 obj.options.onResize();
             }
         });
@@ -112,7 +112,7 @@
 
                 //set the paddingTop
                 if (paddingTop > 0 || paddingBottom > 0) {
-                    $(this).addClass('eqHeightPadding');
+                    $(this).addClass("eqHeightPadding");
                 }
             }
 
@@ -162,12 +162,12 @@
             obj = this;
 
         //do we need to proceed?
-        if (obj.options.accountForPadding && $elem.find('.eqHeightPadding').length) {
+        if (obj.options.accountForPadding && $elem.find(".eqHeightPadding").length) {
 
             var maxColHeight = 0;
 
             //lets get the height we need
-            $elem.find('.eqHeightPadding').each(function() {
+            $elem.find(".eqHeightPadding").each(function() {
                 maxColHeight = Math.max($(this).innerHeight(), maxColHeight);
             });
 
@@ -175,7 +175,7 @@
             if (maxColHeight > 0) {
                 obj.markedColumns.each(function() {
                     //do not set the height of an padding elem
-                    if (!$(this).hasClass('eqHeightPadding')) {
+                    if (!$(this).hasClass("eqHeightPadding")) {
                         $(this).height(maxColHeight);
                     }
                 });
@@ -191,7 +191,7 @@
     $.fn[pluginName] = function(options) {
         return this.each(function() {
             //if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName,
+                $.data(this, "plugin_" + pluginName,
                     new Plugin(this, options));
           //  }
         });
