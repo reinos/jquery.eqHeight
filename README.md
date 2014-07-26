@@ -168,11 +168,3 @@ $(document).ready(function() {
 });
 </script>
 ```
-
-## License
-
-Copyright (c) 2013-2014, Jui-Shan Liang &lt;jenny@jsliang.com&gt;
-
-All rights reserved.
-
-Licensed under GPL v2.
