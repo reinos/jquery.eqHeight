@@ -1,5 +1,25 @@
 {
   "name": "eqHeight",
-  "version": "1",
-  "main": "eqHeight.js"
+  "version": "1.0.0",
+  "homepage": "https://github.com/reinos/jquery.eqHeight",
+  "authors": [
+    "Reinos <info@reinos.nl>"
+  ],
+  "description": "Take the pain of eqHeight away",
+  "main": [
+    "dist/metisMenu.js"
+  ],
+  "keywords": [
+    "eqheight",
+    "jquery.eqheigt",
+    "reinos"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
