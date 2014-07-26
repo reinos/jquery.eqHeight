@@ -30,7 +30,16 @@ module.exports = function(grunt) {
             options: {
                 banner: "<%= banner %>"
             }
-        }
+        },
+        uglify: {
+            plugin: {
+                src: ["jquery.eqheight.js"],
+                dest: "dist/jquery.eqheight.js"
+            },
+            options: {
+                banner: "<%= banner %>"
+            }
+        },
     });
     
     grunt.loadNpmTasks("grunt-contrib-jshint");
