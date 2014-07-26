@@ -23,6 +23,7 @@
 
         //if the options var is a string, just put this as the column_selector
         if (typeof(options) === 'string') {
+            options = {};
             options.columnSelector = options;
         }
 
