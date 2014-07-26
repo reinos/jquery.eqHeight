@@ -73,7 +73,7 @@ You can also use
 ```javascript
 $(".row").eqHeight();
 ```
-in this case because `&lt;div class="column"&gt;` elements are top level children of `&lt;div class="row"&gt;` elements.
+in this case because `<div class="column">` elements are top level children of `<div class="row">` elements.
 
 #### Options
 
