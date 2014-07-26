@@ -1,0 +1,34 @@
+{
+  "name": "jquery.eqheight",
+  "version": "1.0.0",
+  "description": "Take the pain of eqHeight away",
+  "main": "./jquery.eqheight.js",
+  "scripts": {
+    "test": "grunt travis --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reinos/jquery.eqHeight"
+  },
+  "keywords": [
+    "eqheight",
+    "reinos"
+  ],
+  "author": {
+    "name": "Rein de Vries",
+    "email": "info@reinos.nl",
+    "url": "https://github.com/reinos/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reinos/jquery.eqHeight/issues"
+  },
+  "homepage": "https://github.com/reinos/jquery.eqHeight",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.5.0"
+  }
+}
