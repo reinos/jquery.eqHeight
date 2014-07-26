@@ -1,6 +1,6 @@
 # jquery.eqHeight [![Build Status](https://api.travis-ci.org/reinos/jquery.eqHeight.png?branch=master)](https://travis-ci.org/reinos/jquery.eqHeight)
 
-**jquery.eqHeight** is a jQuery plugin that stretches fluid columns to equal height. It is originally designed to be used in responsive web design.
+**jquery.eqHeight** is a jQuery plugin that stretches fluid columns to equal height. It is designed to be used in responsive web design.
 
 With eqHeight applied, floating columns in the same row container are always stretched to the height of the tallest one.
 For better visual experience on mobile devices, eqHeight adjusts column heights as window resizes.
@@ -73,19 +73,43 @@ You can also use
 ```javascript
 $(".row").eqHeight();
 ```
-in this case because &lt;div class="column"&gt; elements are top level children of &lt;div class="row"&gt; elements.
+in this case because `&lt;div class="column"&gt;` elements are top level children of `&lt;div class="row"&gt;` elements.
 
 #### Options
 
-##### equalize_interval
-By default, the equalizing function is called only on window resize.
-You can change this default behavior by setting the `equalize_interval` option.
-If `equalize_interval` is specified with a number value, for example, `500`, then the equalizing function is called every 500ms:
+##### accountForPadding
+Be aware of padding
 
 ```javascript
-/* call the equalizing function every 500ms*/
 $(".row").eqHeight(".column", {
-    equalize_interval: 500
+    accountForPadding: true
+});
+```
+
+##### columnSelector
+The selector to match the elements to eqHeight
+
+```javascript
+$(".row").eqHeight({
+    columnSelector: ".column"
+});
+```
+
+##### onReady
+The onReady callback that will fired right after the plugin is ready with all eqHeights
+
+```javascript
+$(".row").eqHeight({
+    onReady: function(){}
+});
+```
+
+##### onResize
+The onResize callback that will fired on resize
+
+```javascript
+$(".row").eqHeight({
+    onResize: function(){}
 });
 ```
 
@@ -95,76 +119,7 @@ You can set minimum width under which the plug-in will be ignored with the `brea
 This is useful for responsive designs, in which floating element should be the same height side by side, but for smaller screens the elements are stacked and should have auto height.
 
 ```javascript
-/* do not call the equalizing function when display width is under 568px*/
 $(".row").eqHeight(".column", {
     break_point: 568
 });
-```
-
-### Use with existing responsive grid systems
-
-You can use eqHeight with existing responsive grid systems that have similar structures.
-We'll demonstrate some of them here.
-
-#### Twitter Bootstrap
-
-If you're using [Twitter Bootstrap], the idea is the same:
-
-```html
-<!-- include Bootstrap javascript files first -->
-<div class="row">
-    <div class="span3">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
-    </div>
-    <div class="span4">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
-        <p>Line 5</p>
-    </div>
-    <div class="span5">
-        <p>Line 1</p>
-    </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".row, .row-fluid").eqHeight(".span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12");
-});
-</script>
-```
-
-#### Responsive GS
-
-A sample for using [Responsive GS] with eqHeight.coffee:
-
-```html
-<!-- include Responsive GS files here -->
-<script src="http://code.jquery.com/jquery.min.js"></script>
-<div class="row">
-  <div class="col span_3">
-      <p>1-1</p>
-      <p>1-2</p>
-      <p>1-3</p>
-      <p>1-4</p>
-  </div>
-  <div class="col span_4">
-      <p>2-1</p>
-      <p>2-2</p>
-      <p>2-3</p>
-      <p>2-4</p>
-      <p>2-5</p>
-  </div>
-  <div class="col span_5">
-      <p>3-1</p>
-  </div>
-</div>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".row").eqHeight(".col");
-});
-</script>
 ```

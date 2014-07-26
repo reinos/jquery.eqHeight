@@ -13,6 +13,7 @@
             columnSelector: "",
             onReady: function() {},
             onResize: function() {},
+            break_point: null
         };
 
     // The actual plugin constructor
@@ -82,6 +83,11 @@
 
         //set the height to auto
         obj.columns.height("auto");
+
+        //did we hit the breakpoint, stop here
+        if (typeof obj.options.break_point === "number" && $(window).width() <= obj.options.break_point) {
+            return;
+        }
 
         //get the first height
         var rowTopValue = obj.columns.first().offset().top;
