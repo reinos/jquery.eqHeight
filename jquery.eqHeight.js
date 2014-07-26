@@ -23,8 +23,9 @@
 
         //if the options var is a string, just put this as the column_selector
         if (typeof(options) === 'string') {
+            var columnSelector = options;
             options = {};
-            options.columnSelector = options;
+            options.columnSelector = columnSelector;
         }
 
         // the default options for future instances of the plugin
