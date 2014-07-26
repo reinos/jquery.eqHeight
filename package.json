@@ -2,7 +2,7 @@
   "name": "jquery.eqheight",
   "version": "1.0.0",
   "description": "Take the pain of eqHeight away",
-  "main": "./dist/jquery.eqheight.js",
+  "main": "dist/jquery.eqHeight.js",
   "scripts": {
     "test": "grunt travis --verbose"
   },

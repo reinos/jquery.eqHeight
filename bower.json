@@ -7,7 +7,7 @@
   ],
   "description": "Take the pain of eqHeight away",
   "main": [
-    "dist/metisMenu.js"
+    "dist/jquery.eqHeight.js"
   ],
   "keywords": [
     "eqheight",

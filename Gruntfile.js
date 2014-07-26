@@ -19,13 +19,13 @@ module.exports = function(grunt) {
             },
             all: [
                 "Gruntfile.js",
-                "src/jquery.eqheight.js"
+                "src/jquery.eqHeight.js"
             ]
         },
         concat: {
             plugin: {
-                src: ["src/jquery.eqheight.js"],
-                dest: "dist/jquery.eqheight.js"
+                src: ["src/jquery.eqHeight.js"],
+                dest: "dist/jquery.eqHeight.js"
             },
             options: {
                 banner: "<%= banner %>"
@@ -33,8 +33,8 @@ module.exports = function(grunt) {
         },
         uglify: {
             plugin: {
-                src: ["src/jquery.eqheight.js"],
-                dest: "dist/jquery.eqheight.js"
+                src: ["src/jquery.eqHeight.js"],
+                dest: "dist/jquery.eqHeight.js"
             },
             options: {
                 banner: "<%= banner %>"
