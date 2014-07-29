@@ -8,11 +8,21 @@ Furthurmore, eqHeight resets columns to their default height values when columns
 
 eqHeight currently supports all Responsive websites. 
 
-## How to Use
+## Installation
 
-### Download eqHeight
+* [npm](http://npmjs.org/)
 
-Download `jquery.eqheight.js` from [Github](https://github.com/reinos/jquery.eqHeight).
+```bash
+npm install jquery.eqHeight
+```
+
+* [Bower](http://bower.io)
+
+```bash
+bower install jquery.eqHeight
+```
+
+* [Download](https://github.com/reinos/jquery.eqHeight/archive/master.zip)
 
 ### Put eqHeight in your page
 
