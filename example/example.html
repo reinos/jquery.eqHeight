@@ -1,9 +1,8 @@
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="eqHeight.js"></script>
+<script src="../src/jquery.eqHeight.js"></script>
 <script>
     $(function(){
-        $('.row').eqHeight({
-        	columnSelector : '.column',
+        $('.row').eqHeight('.column', {
         	accountForPadding : true
         });
     });

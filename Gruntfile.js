@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         uglify: {
             plugin: {
                 src: ["dist/jquery.eqHeight.js"],
-                dest: "dist/jquery.eqHeight.js"
+                dest: "dist/jquery.eqHeight.min.js"
             },
             options: {
                 banner: "<%= banner %>"

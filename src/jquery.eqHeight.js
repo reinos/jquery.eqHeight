@@ -17,7 +17,7 @@
         };
 
     // The actual plugin constructor
-    function Plugin(element, options) {
+    function Plugin(element, options, options_optional) {
         this.element = element;
 
         //if the options var is a string, just put this as the column_selector
@@ -28,7 +28,7 @@
         }
 
         // the default options for future instances of the plugin
-        this.options = $.extend({}, defaults, options);
+        this.options = $.extend({}, defaults, options, options_optional);
 
         //set some defaults
         this._defaults = defaults;
@@ -189,12 +189,9 @@
 
     // A really lightweight plugin wrapper around the constructor,
     // preventing against multiple instantiations
-    $.fn[pluginName] = function(options) {
+    $.fn[pluginName] = function(options, options_optional) {
         return this.each(function() {
-            //if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, "plugin_" + pluginName,
-                    new Plugin(this, options));
-          //  }
+            new Plugin(this, options, options_optional);
         });
     };
 

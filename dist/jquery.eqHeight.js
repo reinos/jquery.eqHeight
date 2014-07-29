@@ -1,9 +1,206 @@
 /*
- * jquery.eqheight - v1.1.0
+ * jquery.eqheight - v1.2.0
  * Take the pain of eqHeight away
  * https://github.com/reinos/jquery.eqHeight
  *
  * Made by Rein de Vries
  * Under MIT License
  */
-!function(a,b){function c(b,c){if(this.element=b,"string"==typeof c){var f=c;c={},c.columnSelector=f}this.options=a.extend({},e,c),this._defaults=e,this._name=d,this.init()}var d="eqHeight",e={accountForPadding:!1,columnSelector:"",onReady:function(){},onResize:function(){},break_point:null};c.prototype.init=function(){var c=a(this.element),d=this;d.columns=c.find(d.options.columnSelector),0===d.columns.length&&(d.columns=c.children(d.options.columnSelector)),0!==d.columns.length&&(setTimeout(function(){d.equalizer(),"function"==typeof d.options.onReady&&d.options.onReady()},100),a(b).resize(function(){d.equalizer(),"function"==typeof d.options.onResize&&d.options.onResize()}))},c.prototype.equalizer=function(){var c=this;if(c.columns.height("auto"),!("number"==typeof c.options.break_point&&a(b).width()<=c.options.break_point)){var d,e,f=c.columns.first().offset().top;c.columns.each(function(){var b;b=a(this).offset().top,b!==f&&(c.equalizeMarkedColumns(),f=a(this).offset().top),c.options.accountForPadding&&(d=parseInt(a(this).css("padding-top").replace("px","")),e=parseInt(a(this).css("padding-bottom").replace("px","")),(d>0||e>0)&&a(this).addClass("eqHeightPadding")),a(this).addClass("eqHeight_row")}),c.equalizeMarkedColumns(),c.equalizePaddings()}},c.prototype.equalizeMarkedColumns=function(){var b=this;b.markedColumns=a(".eqHeight_row");var c=0;b.markedColumns.each(function(){c=Math.max(a(this).height(),c)}),b.markedColumns.height(c),a(".eqHeight_row").removeClass("eqHeight_row")},c.prototype.equalizePaddings=function(){var b=a(this.element),c=this;if(c.options.accountForPadding&&b.find(".eqHeightPadding").length){var d=0;b.find(".eqHeightPadding").each(function(){d=Math.max(a(this).innerHeight(),d)}),d>0&&c.markedColumns.each(function(){a(this).hasClass("eqHeightPadding")||a(this).height(d)})}a(".eqHeightPadding").removeClass("eqHeightPadding")},a.fn[d]=function(b){return this.each(function(){a.data(this,"plugin_"+d,new c(this,b))})}}(jQuery,window,document);
+/**
+ * based on (https://github.com/jsliang/eqHeight.coffee)
+ *
+ * eqheight.js
+ */
+(function($, window, document, undefined) {
+
+    // Create the defaults once
+    // heights - http://www.texelate.co.uk/blog/jquery-whats-the-difference-between-height-innerheight-and-outerheight/
+    var pluginName = "eqHeight",
+        defaults = {
+            accountForPadding: false, // true , false
+            columnSelector: "",
+            onReady: function() {},
+            onResize: function() {},
+            break_point: null
+        };
+
+    // The actual plugin constructor
+    function Plugin(element, options, options_optional) {
+        this.element = element;
+
+        //if the options var is a string, just put this as the column_selector
+        if (typeof(options) === "string") {
+            var columnSelector = options;
+            options = {};
+            options.columnSelector = columnSelector;
+        }
+
+        // the default options for future instances of the plugin
+        this.options = $.extend({}, defaults, options, options_optional);
+
+        //set some defaults
+        this._defaults = defaults;
+        this._name = pluginName;
+
+        //init the plugin
+        this.init();
+    }
+
+    //init the plugin
+    Plugin.prototype.init = function() {
+        var $elem = $(this.element),
+            obj = this;
+
+        //get the elements
+        obj.columns = $elem.find(obj.options.columnSelector);
+
+        //nothing found, we get the first set of children
+        if (obj.columns.length === 0) {
+            obj.columns = $elem.children(obj.options.columnSelector);
+        }
+
+        //still no luck, return
+        if (obj.columns.length === 0) {
+            return;
+        }
+
+        //start ewualizing
+        //obj.equalizer();
+
+        //start after 100ms, so we are sure everything is loaded
+        setTimeout(function() {
+            obj.equalizer();
+            // call the onReady function
+            if (typeof obj.options.onReady === "function") {
+                obj.options.onReady();
+            }
+        }, 100);
+
+        //responsive... do it with the resize
+        $(window).resize(function() {
+            obj.equalizer();
+            // call the onResize function
+            if (typeof obj.options.onResize === "function") {
+                obj.options.onResize();
+            }
+        });
+    };
+
+    Plugin.prototype.equalizer = function() {
+        var obj = this;
+
+        //set the height to auto
+        obj.columns.height("auto");
+
+        //did we hit the breakpoint, stop here
+        if (typeof obj.options.break_point === "number" && $(window).width() <= obj.options.break_point) {
+            return;
+        }
+
+        //get the first height
+        var rowTopValue = obj.columns.first().offset().top;
+
+        var paddingTop, paddingBottom;
+
+        //loop over all the elements
+        obj.columns.each(function() {
+            //set the var for the height
+            var currentTop;
+
+            //get  the current top
+            currentTop = $(this).offset().top;
+
+            //Check the height of the element versus the document
+            //is the height different, we can concluded that the element is not in row
+            if (currentTop !== rowTopValue) {
+                obj.equalizeMarkedColumns();
+                rowTopValue = $(this).offset().top;
+            }
+
+            //do we need to take care of paddings?
+            if (obj.options.accountForPadding) {
+                //mark the element which need to be reparsed due the padding
+                paddingTop = parseInt($(this).css("padding-top").replace("px", ""));
+                paddingBottom = parseInt($(this).css("padding-bottom").replace("px", ""));
+
+                //set the paddingTop
+                if (paddingTop > 0 || paddingBottom > 0) {
+                    $(this).addClass("eqHeightPadding");
+                }
+            }
+
+            //mark the div with a class
+            $(this).addClass("eqHeight_row");
+        });
+
+        //lets eqHeight all the marked columns
+        obj.equalizeMarkedColumns();
+
+        //lets do the padding calculation
+        obj.equalizePaddings();
+    };
+
+    //eqHeight the marked columns
+    Plugin.prototype.equalizeMarkedColumns = function() {
+        var obj = this;
+
+        //get the markerd element
+        obj.markedColumns = $(".eqHeight_row");
+
+        //default height
+        var maxColHeight = 0;
+
+        //loop over the marked columns
+        obj.markedColumns.each(function() {
+
+            //calculate the heighest value
+            maxColHeight = Math.max($(this).height(), maxColHeight);
+
+        });
+
+        //set the height
+        obj.markedColumns.height(maxColHeight);
+
+        //remove the class markerd indicator
+        $(".eqHeight_row").removeClass("eqHeight_row");
+    };
+
+    //eqHeight the paddings
+    Plugin.prototype.equalizePaddings = function() {
+        var $elem = $(this.element),
+            obj = this;
+
+        //do we need to proceed?
+        if (obj.options.accountForPadding && $elem.find(".eqHeightPadding").length) {
+
+            var maxColHeight = 0;
+
+            //lets get the height we need
+            $elem.find(".eqHeightPadding").each(function() {
+                maxColHeight = Math.max($(this).innerHeight(), maxColHeight);
+            });
+
+            //reset the height to the padding
+            if (maxColHeight > 0) {
+                obj.markedColumns.each(function() {
+                    //do not set the height of an padding elem
+                    if (!$(this).hasClass("eqHeightPadding")) {
+                        $(this).height(maxColHeight);
+                    }
+                });
+            }
+        }
+
+        //remove the class markerd indicator
+        $(".eqHeightPadding").removeClass("eqHeightPadding");
+    };
+
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[pluginName] = function(options, options_optional) {
+        return this.each(function() {
+            new Plugin(this, options, options_optional);
+        });
+    };
+
+})(jQuery, window, document);
