@@ -1,59 +1,163 @@
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="../src/jquery.eqHeight.js"></script>
-<script>
-    $(function(){
-        $('.row').eqHeight('.column', {
-        	accountForPadding : true
-        });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EqHeight</title>
+
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .column {
+            border:1px solid black;
+        }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>EqHeight with javascript call</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row javascript-target">
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                        <p>Line 5</p>
+                    </div>
+                    <div class="col-xs-3 column" style="padding-bottm:20px;">
+                        <p>Line 1</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                    </div>
+               
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                        <p>Line 5</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                    </div>  
+                </div>
+
+            </div>
+            <div class="col-xs-12">
+                <pre>
+$(function(){
+    $('.javascript-target').eqHeight('.column', {
+        accountForPadding : true
     });
-</script>
+});
+                </pre>
+            </div>
+        </div>
+    </div>
 
-<style>
-    .column {
-        border:1px solid black;
-    }
-</style>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>EqHeight with data element</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" data-eqheight-column="column" data-eqheight-account-for-padding="true">
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                        <p>Line 5</p>
+                    </div>
+                    <div class="col-xs-3 column" style="padding-bottom:20px;">
+                        <p>Line 1</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                    </div>
+               
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                        <p>Line 2</p>
+                        <p>Line 3</p>
+                        <p>Line 4</p>
+                        <p>Line 5</p>
+                    </div>
+                    <div class="col-xs-3 column">
+                        <p>Line 1</p>
+                    </div>  
+                </div>
 
-<div class="row" style="display: block; clear: both;">
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
+            </div>
+            <div class="col-xs-12">
+                <pre>
+data-eqheight-column="column"
+                </pre>
+            </div>
+        </div>
     </div>
-    <div class="column" style="display: block; float: left; width: 200px; padding-bottom:20px;">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
-        <p>Line 5</p>
-    </div>
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-    </div>
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-    </div>
-</div>
-<div class="row" style="display: block; clear: both;">
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
-    </div>
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-        <p>Line 2</p>
-        <p>Line 3</p>
-        <p>Line 4</p>
-        <p>Line 5</p>
-    </div>
-    <div class="column" style="display: block; float: left; width: 200px;">
-        <p>Line 1</p>
-    </div>
-   
-</div>  
+    
 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../src/jquery.eqHeight.js"></script>
+    <script>
+        $(function(){
+            $('.javascript-target').eqHeight('.column', {
+                accountForPadding : true
+            });
+        });
+    </script>
+
+</body>
+</html>

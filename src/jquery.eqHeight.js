@@ -13,7 +13,7 @@
             columnSelector: "",
             onReady: function() {},
             onResize: function() {},
-            break_point: null
+            breakPoint: null
         };
 
     // The actual plugin constructor
@@ -85,7 +85,7 @@
         obj.columns.height("auto");
 
         //did we hit the breakpoint, stop here
-        if (typeof obj.options.break_point === "number" && $(window).width() <= obj.options.break_point) {
+        if (typeof obj.options.breakPoint === "number" && $(window).width() <= obj.options.breakPoint) {
             return;
         }
 
@@ -194,5 +194,15 @@
             new Plugin(this, options, options_optional);
         });
     };
+
+    //tartget data elements
+   $("[data-eqheight-column]").each(function(){
+    
+        $(this).eqHeight("."+$(this).data("eqheight-column"), {
+            accountForPadding : $(this).data("eqheight-account-for-padding") !== undefined ?  $(this).data("eqheight-account-for-padding") : false,
+            breakPoint : $(this).data("eqheight-break-point") !== undefined ?  $(this).data("eqheight-break-point") : null
+        });
+
+   });
 
 })(jQuery, window, document);
