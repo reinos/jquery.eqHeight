@@ -87,15 +87,6 @@ in this case because `<div class="column">` elements are top level children of `
 
 #### Options
 
-##### accountForPadding
-Be aware of padding
-
-```javascript
-$(".row").eqHeight(".column", {
-    accountForPadding: true
-});
-```
-
 ##### columnSelector
 The selector to match the elements to eqHeight
 
@@ -112,6 +103,8 @@ The onReady callback that will fired right after the plugin is ready with all eq
 $(".row").eqHeight({
     onReady: function(){}
 });
+or
+$(document).on("eqHeight.onReady", function (evt) { });
 ```
 
 ##### onResize
@@ -121,6 +114,8 @@ The onResize callback that will fired on resize
 $(".row").eqHeight({
     onResize: function(){}
 });
+or
+$(document).on("eqHeight.onResize", function (evt) { });
 ```
 
 ##### break_point
@@ -132,4 +127,18 @@ This is useful for responsive designs, in which floating element should be the s
 $(".row").eqHeight(".column", {
     break_point: 568
 });
+```
+
+#### Data elements (no JS call required)
+
+##### column
+
+```html
+<div class="row" data-eqheight-column></div>
+```
+
+##### Break point
+
+```html
+<div class="row" data-break-point></div>
 ```

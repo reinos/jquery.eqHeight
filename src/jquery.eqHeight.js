@@ -1,15 +1,10 @@
-/**
- * based on (https://github.com/jsliang/eqHeight.coffee)
- *
- * eqheight.js
- */
 (function($, window, document, undefined) {
 
+    "use strict";
+
     // Create the defaults once
-    // heights - http://www.texelate.co.uk/blog/jquery-whats-the-difference-between-height-innerheight-and-outerheight/
     var pluginName = "eqHeight",
         defaults = {
-            accountForPadding: false, // true , false
             columnSelector: "",
             onReady: function() {},
             onResize: function() {},
@@ -66,6 +61,15 @@
             if (typeof obj.options.onReady === "function") {
                 obj.options.onReady();
             }
+
+            //hook into this event
+            $.event.trigger({
+                type: "eqHeight.onReady",
+                message: "eqHeight is ready",
+                target: $elem,
+                time: new Date()
+            });
+
         }, 100);
 
         //responsive... do it with the resize
@@ -75,6 +79,14 @@
             if (typeof obj.options.onResize === "function") {
                 obj.options.onResize();
             }
+
+            //hook into this event
+            $.event.trigger({
+                type: "eqHeight.onResize",
+                message: "eqHeight detect a resize",
+                target: $elem,
+                time: new Date()
+            });
         });
     };
 
@@ -92,7 +104,7 @@
         //get the first height
         var rowTopValue = obj.columns.first().offset().top;
 
-        var paddingTop, paddingBottom;
+        var paddingTop, paddingBottom, totalPadding = 0;
 
         //loop over all the elements
         obj.columns.each(function() {
@@ -105,20 +117,23 @@
             //Check the height of the element versus the document
             //is the height different, we can concluded that the element is not in row
             if (currentTop !== rowTopValue) {
-                obj.equalizeMarkedColumns();
+                obj.equalizeMarkedColumns(totalPadding);
                 rowTopValue = $(this).offset().top;
+                totalPadding = 0;
             }
 
-            //do we need to take care of paddings?
-            if (obj.options.accountForPadding) {
-                //mark the element which need to be reparsed due the padding
-                paddingTop = parseInt($(this).css("padding-top").replace("px", ""));
-                paddingBottom = parseInt($(this).css("padding-bottom").replace("px", ""));
+            //Get the paddings
+            paddingTop = parseInt($(this).css("padding-top").replace("px", ""));
+            paddingBottom = parseInt($(this).css("padding-bottom").replace("px", ""));
 
-                //set the paddingTop
-                if (paddingTop > 0 || paddingBottom > 0) {
-                    $(this).addClass("eqHeightPadding");
-                }
+            //get the total height of the paddings
+            if(totalPadding < (paddingTop + paddingBottom)) {
+                totalPadding = paddingTop + paddingBottom;
+            }
+            
+            //add a padding class if needed
+            if (paddingTop > 0 || paddingBottom > 0) {
+             $(this).addClass("eqHeightPadding");
             }
 
             //mark the div with a class
@@ -126,15 +141,17 @@
         });
 
         //lets eqHeight all the marked columns
-        obj.equalizeMarkedColumns();
+        obj.equalizeMarkedColumns(totalPadding);
 
         //lets do the padding calculation
-        obj.equalizePaddings();
+        //obj.equalizePaddings();
     };
 
     //eqHeight the marked columns
-    Plugin.prototype.equalizeMarkedColumns = function() {
+    Plugin.prototype.equalizeMarkedColumns = function(totalPadding) {
         var obj = this;
+        
+        totalPadding = totalPadding || 0;
 
         //get the markerd element
         obj.markedColumns = $(".eqHeight_row");
@@ -151,40 +168,17 @@
         });
 
         //set the height
-        obj.markedColumns.height(maxColHeight);
+        obj.markedColumns.each(function() {
+            if($(this).hasClass("eqHeightPadding")) {
+                $(this).height(maxColHeight);
+                $(this).removeClass("eqHeightPadding");
+            } else {
+                $(this).height(maxColHeight + totalPadding);
+            }
+        });
 
         //remove the class markerd indicator
         $(".eqHeight_row").removeClass("eqHeight_row");
-    };
-
-    //eqHeight the paddings
-    Plugin.prototype.equalizePaddings = function() {
-        var $elem = $(this.element),
-            obj = this;
-
-        //do we need to proceed?
-        if (obj.options.accountForPadding && $elem.find(".eqHeightPadding").length) {
-
-            var maxColHeight = 0;
-
-            //lets get the height we need
-            $elem.find(".eqHeightPadding").each(function() {
-                maxColHeight = Math.max($(this).innerHeight(), maxColHeight);
-            });
-
-            //reset the height to the padding
-            if (maxColHeight > 0) {
-                obj.markedColumns.each(function() {
-                    //do not set the height of an padding elem
-                    if (!$(this).hasClass("eqHeightPadding")) {
-                        $(this).height(maxColHeight);
-                    }
-                });
-            }
-        }
-
-        //remove the class markerd indicator
-        $(".eqHeightPadding").removeClass("eqHeightPadding");
     };
 
     // A really lightweight plugin wrapper around the constructor,
@@ -197,10 +191,12 @@
 
     //tartget data elements
    $("[data-eqheight-column]").each(function(){
-    
-        $(this).eqHeight("."+$(this).data("eqheight-column"), {
-            accountForPadding : $(this).data("eqheight-account-for-padding") !== undefined ?  $(this).data("eqheight-account-for-padding") : false,
-            breakPoint : $(this).data("eqheight-break-point") !== undefined ?  $(this).data("eqheight-break-point") : null
+
+        var column = "."+$(this).data("eqheight-column");
+        var breakPoint = $(this).data("eqheight-break-point") !== undefined ?  $(this).data("eqheight-break-point") : null;
+
+        $(this).eqHeight(column, {
+            breakPoint : breakPoint
         });
 
    });
