@@ -134,11 +134,11 @@ $(".row").eqHeight(".column", {
 ##### column
 
 ```html
-<div class="row" data-eqheight-column></div>
+<div class="row" data-eqheight-column="column"></div>
 ```
 
 ##### Break point
 
 ```html
-<div class="row" data-break-point></div>
+<div class="row" data-break-point="568"></div>
 ```
