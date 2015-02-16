@@ -150,9 +150,10 @@
 
         //lets eqHeight all the marked columns
         obj.equalizeMarkedColumns(totalPadding);
-
-        //lets do the padding calculation
-        //obj.equalizePaddings();
+        
+        //remove the class markerd indicator
+        $(".eqHeightPadding").removeClass("eqHeightPadding");
+        $(".eqHeight_row").removeClass("eqHeight_row");
     };
 
     //eqHeight the marked columns
@@ -172,21 +173,16 @@
 
             //calculate the heighest value
             maxColHeight = Math.max($(this).height(), maxColHeight);
-
         });
 
         //set the height
         obj.markedColumns.each(function() {
             if($(this).hasClass("eqHeightPadding")) {
                 $(this).height(maxColHeight);
-                $(this).removeClass("eqHeightPadding");
             } else {
                 $(this).height(maxColHeight + totalPadding);
             }
         });
-
-        //remove the class markerd indicator
-        $(".eqHeight_row").removeClass("eqHeight_row");
     };
 
     // A really lightweight plugin wrapper around the constructor,
@@ -206,7 +202,6 @@
         $(this).eqHeight(column, {
             breakPoint : breakPoint
         });
-
    });
 
 })(jQuery, window, document);
