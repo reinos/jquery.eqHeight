@@ -118,14 +118,14 @@ or
 $(document).on("eqHeight.onResize", function (evt) { });
 ```
 
-##### break_point
-You can set minimum width under which the plug-in will be ignored with the `break_point` option.
+##### breakPoint
+You can set minimum width under which the plug-in will be ignored with the `breakPoint` option.
 
 This is useful for responsive designs, in which floating element should be the same height side by side, but for smaller screens the elements are stacked and should have auto height.
 
 ```javascript
 $(".row").eqHeight(".column", {
-    break_point: 568
+    breakPoint: 568
 });
 ```
 
